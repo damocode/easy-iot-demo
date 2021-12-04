@@ -10,6 +10,6 @@ import org.damocode.iot.core.message.DeviceMessage;
  */
 public interface TcpDeviceMessage {
 
-    DeviceMessage toDeviceMessage();
+    DeviceMessage toDeviceMessage(byte[] bytes, int offset);
 
 }

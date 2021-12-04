@@ -10,8 +10,7 @@ import org.damocode.iot.core.message.DeviceMessage;
 import org.damocode.iot.core.message.Headers;
 import org.damocode.iot.core.message.codec.*;
 import org.damocode.iot.core.server.session.DeviceSession;
-import org.damocode.iot.utils.BytesUtils;
-import org.springframework.stereotype.Component;
+import org.damocode.iot.core.utils.BytesUtils;
 
 /**
  * @Description: 雷达水位流速设备消息编码器
@@ -20,8 +19,12 @@ import org.springframework.stereotype.Component;
  * @Version: 1.0.0
  */
 @Slf4j
-@Component
 public class RadarDeviceMessageCodec implements DeviceMessageCodec {
+
+    @Override
+    public Transport getSupportTransport() {
+        return DefaultTransport.TCP;
+    }
 
     @Override
     public DeviceMessage decode(MessageDecodeContext context) {
@@ -36,8 +39,7 @@ public class RadarDeviceMessageCodec implements DeviceMessageCodec {
             session.ping();
             return null;
         }
-        radarPropertyMessage.fromByte(payload,1);
-        DeviceMessage deviceMessage = radarPropertyMessage.toDeviceMessage();
+        DeviceMessage deviceMessage = radarPropertyMessage.toDeviceMessage(payload,1);
         deviceMessage.addHeader(Headers.keepOnline,true);
         deviceMessage.addHeader(Headers.keepOnlineTimeoutSeconds,2 * 60);
         String hex = HexUtil.encodeHexStr("Water Receive OK");
@@ -49,5 +51,6 @@ public class RadarDeviceMessageCodec implements DeviceMessageCodec {
     public EncodedMessage encode(MessageEncodeContext context) {
         return null;
     }
+
 }
 

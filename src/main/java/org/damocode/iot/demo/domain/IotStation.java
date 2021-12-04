@@ -25,12 +25,17 @@ public class IotStation implements DeviceOperatorInfo, Serializable {
      * 主键id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    private Long id;
 
     /**
      * 站点类型id
      */
     private Long sttpId;
+
+    /**
+     * 设备ID
+     */
+    private String deviceId;
 
     /**
      * 站点名称
@@ -87,10 +92,5 @@ public class IotStation implements DeviceOperatorInfo, Serializable {
      */
     private Date offlineTime;
 
-
-    @Override
-    public String getDeviceId() {
-        return getId();
-    }
 }
 

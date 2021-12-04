@@ -1,5 +1,6 @@
 package org.damocode.iot.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.damocode.iot.core.device.DeviceOperatorInfo;
 import org.damocode.iot.core.device.IDeviceOperatorService;
@@ -19,14 +20,14 @@ public class IotStationService extends ServiceImpl<IotStationMapper, IotStation>
 
     @Override
     public DeviceOperatorInfo getByDeviceId(String deviceId) {
-        return this.getById(deviceId);
+        return this.getOne(Wrappers.<IotStation>lambdaQuery().eq(IotStation::getDeviceId,deviceId));
     }
 
     @Override
     public <T extends DeviceOperatorInfo> Boolean updateByDeviceId(T t) {
         IotStation station = (IotStation)t;
-        station.setId(t.getDeviceId());
-        return this.updateById(station);
+        station.setDeviceId(t.getDeviceId());
+        return this.update(station, Wrappers.<IotStation>lambdaUpdate().eq(IotStation::getDeviceId,t.getDeviceId()));
     }
 
 }

@@ -1,9 +1,9 @@
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://127.0.0.1:3306/easy-iot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/iot_datav?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true
     username: root
-    password: 123456
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       auto-commit: true
@@ -39,4 +39,4 @@ mybatis-plus:
 
 logging:
   level:
-    com.yrihr.datav: DEBUG
+    org.damocode.iot: DEBUG
